@@ -1,8 +1,420 @@
-/*
+/* ── Root container ─────────────────────────────────────────────────────────── */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.pe-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  font-size: var(--font-ui-small);
+  color: var(--text-normal);
+  user-select: none;
+}
 
-If your plugin does not need CSS, delete this file.
+/* ── Toolbar ─────────────────────────────────────────────────────────────────── */
 
-*/
+.pe-toolbar {
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Row 1: search + sort */
+.pe-search-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pe-search-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--background-modifier-form-field);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 3px 6px;
+  transition: border-color 0.15s ease;
+}
+
+.pe-search-wrap:focus-within {
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.15);
+}
+
+.pe-search-icon {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pe-search-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.pe-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  outline: none;
+  padding: 0;
+  min-width: 0;
+}
+
+.pe-search-input::placeholder {
+  color: var(--text-faint);
+}
+
+.pe-search-clear {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: var(--radius-s);
+  padding: 1px;
+}
+
+.pe-search-clear:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.pe-search-clear svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pe-sort-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.pe-sort-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.pe-sort-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Row 2: scope selector */
+.pe-scope-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pe-scope-label {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pe-scope-select {
+  flex: 1;
+  font-size: var(--font-ui-smaller);
+  font-family: var(--font-interface);
+  background: var(--background-modifier-form-field);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  color: var(--text-normal);
+  padding: 2px 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.pe-scope-select:focus {
+  border-color: var(--interactive-accent);
+}
+
+/* ── Loading indicator ───────────────────────────────────────────────────────── */
+
+.pe-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.pe-loading-icon {
+  display: flex;
+  align-items: center;
+  animation: pe-spin 1s linear infinite;
+}
+
+.pe-loading-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes pe-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Scrollable list ─────────────────────────────────────────────────────────── */
+
+.pe-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0 8px;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────────── */
+
+.pe-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 16px;
+  color: var(--text-muted);
+}
+
+.pe-empty-icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+
+.pe-empty-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.pe-empty-text {
+  font-size: var(--font-ui-small);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Shared: chevron ─────────────────────────────────────────────────────────── */
+
+.pe-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.12s ease;
+}
+
+.pe-chevron svg {
+  width: 13px;
+  height: 13px;
+}
+
+.pe-prop-header.is-expanded > .pe-chevron,
+.pe-value-header.is-expanded > .pe-chevron {
+  transform: rotate(90deg);
+}
+
+/* ── Shared: count badge ─────────────────────────────────────────────────────── */
+
+.pe-count {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  flex-shrink: 0;
+  min-width: 18px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Shared: indent + connector line ─────────────────────────────────────────── */
+
+.pe-children-wrap {
+  position: relative;
+  margin-left: 18px;
+}
+
+.pe-children-wrap::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--background-modifier-border);
+}
+
+/* ═══════════════════════════════════════════════
+   Level 1 — Property rows
+   ═══════════════════════════════════════════════ */
+
+.pe-prop-wrap {
+  /* no styles needed — wrapper only */
+}
+
+.pe-prop-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: var(--radius-s);
+}
+
+.pe-prop-header:hover {
+  background: var(--background-modifier-hover);
+}
+
+.pe-type-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.pe-type-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.pe-prop-key {
+  flex: 1;
+  font-weight: var(--font-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════
+   Level 2 — Value rows
+   ═══════════════════════════════════════════════ */
+
+.pe-value-wrap {
+  /* no styles needed — wrapper only */
+}
+
+.pe-value-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 6px;
+  cursor: pointer;
+  border-radius: var(--radius-s);
+}
+
+.pe-value-header:hover {
+  background: var(--background-modifier-hover);
+}
+
+.pe-value-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.pe-value-text.is-empty {
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════
+   Level 3 — Note rows
+   ═══════════════════════════════════════════════ */
+
+.pe-note-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 2px 8px 2px 6px;
+  cursor: pointer;
+  border-radius: var(--radius-s);
+}
+
+.pe-note-row:hover {
+  background: var(--background-modifier-hover);
+}
+
+.pe-note-row:hover .pe-note-name {
+  color: var(--text-accent);
+}
+
+.pe-note-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-faint);
+  margin-top: 1px; /* optical alignment */
+}
+
+.pe-note-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pe-note-name {
+  flex: 1;
+  font-size: var(--font-ui-smaller);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.1s ease;
+}
+
+.pe-note-path {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40%;
+  flex-shrink: 0;
+}
+
+.pe-no-notes {
+  padding: 4px 8px;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ── Search highlight ─────────────────────────────────────────────────────────── */
+
+.pe-highlight {
+  background: var(--text-highlight-bg);
+  color: var(--text-normal);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ── Settings page ───────────────────────────────────────────────────────────── */
+
+.pe-settings-info {
+  margin-top: 24px;
+  padding: 12px 14px;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.pe-settings-info p {
+  margin: 0;
+}

@@ -1,11 +1,15 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "1.0.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+  "id": "property-explorer",
+  "name": "Property Explorer",
+  "version": "0.1.0",
+  "minAppVersion": "1.8.0",
+  "description": "Explore all vault properties in an expandable right-pane tree — browse by key → value → note, with search and sorting.",
+  "author": "October",
+  "authorUrl": "https://github.com/october-learns",
+  "isDesktopOnly": false,
+
+	"fundingUrl": { 
+		"Buy Me a Coffee": "https://buymeacoffee.com/octoberlearns" , 
+    "Ko-fi": "https://ko-fi.com/octoberlearns"
+	}
 }
